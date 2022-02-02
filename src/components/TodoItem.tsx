@@ -5,9 +5,18 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 
 const TodoItem = ({ item }: { item: { title: string, id: string } }) => {
     return (
-        <View style={styles.itemContainer}>
-            <AntDesign style={styles.rightSpace} name="delete" size={24} color="#5CC2FF" />
-            <Entypo style={styles.rightSpace} name="edit" size={24} color="#5CC2FF" />
+        <View
+            style={styles.itemContainer}>
+            <AntDesign
+                style={styles.rightSpace}
+                name="delete"
+                size={24}
+                color="#5CC2FF" />
+            <Entypo
+                style={styles.rightSpace}
+                name="edit"
+                size={24}
+                color="#5CC2FF" />
             <Text>{item.title}</Text>
             <View style={{ flex: 1 }}></View>
             <CheckBox
