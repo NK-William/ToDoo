@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import TodoItem from '../components/TodoItem';
+import { Entypo } from '@expo/vector-icons';
 
 const TodoScreen = () => {
-  const DATA = [
+  const [doto, setDoto] = useState([
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'First Item',
@@ -16,7 +17,15 @@ const TodoScreen = () => {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Third Item',
     },
-  ];
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d732',
+      title: 'Fourth Item',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29543',
+      title: 'Fiveth Item',
+    }
+  ]);
 
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
     <TodoItem item={item} />
@@ -28,10 +37,14 @@ const TodoScreen = () => {
       <Text style={styles.todotitle}>2 Tasks</Text>
       <View style={styles.itemsContainer}>
         <FlatList
-          data={DATA}
+          data={doto}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          style={{ flex: 1 }}
         />
+        <View style={styles.addButton}>
+          <Entypo name="plus" size={24} color="white" />
+        </View>
       </View>
     </View>
   );
@@ -50,5 +63,14 @@ const styles = StyleSheet.create({
     { marginHorizontal: 40, fontWeight: 'bold', color: 'white', fontSize: 35 },
   todotitle:
     { marginHorizontal: 40, color: 'white', fontSize: 18, marginBottom: 24 },
-  itemsContainer: { flex: 1, backgroundColor: "white", borderRadius: 40, paddingVertical: 30, paddingHorizontal: 15 }
+  itemsContainer: { flex: 1, backgroundColor: "white", borderRadius: 40, paddingVertical: 30, paddingHorizontal: 15 },
+  addButton: {
+    height: 70,
+    width: 70,
+    backgroundColor: "#5CC2FF",
+    alignSelf: "flex-end",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
