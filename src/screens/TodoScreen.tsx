@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import TodoItem from '../components/TodoItem';
 
 const TodoScreen = () => {
@@ -50,5 +50,5 @@ const styles = StyleSheet.create({
     { marginHorizontal: 40, fontWeight: 'bold', color: 'white', fontSize: 35 },
   todotitle:
     { marginHorizontal: 40, color: 'white', fontSize: 18, marginBottom: 24 },
-  itemsContainer: { flex: 1, backgroundColor: "white", borderRadius: 40, padding: 40 }
+  itemsContainer: { flex: 1, backgroundColor: "white", borderRadius: 40, paddingVertical: 30, paddingHorizontal: 15 }
 });
