@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import React from 'react';
+import TodoItem from '../components/TodoItem';
 
 const TodoScreen = () => {
   const DATA = [
@@ -18,7 +19,7 @@ const TodoScreen = () => {
   ];
 
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
-    <Text>{item.title}</Text>
+    <TodoItem item={item} />
   );
 
   return (
