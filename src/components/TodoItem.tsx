@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import CheckBox from 'expo-checkbox';
 import { AntDesign, Entypo } from '@expo/vector-icons';
@@ -7,16 +7,20 @@ const TodoItem = ({ item }: { item: { title: string, id: string } }) => {
     return (
         <View
             style={styles.itemContainer}>
-            <AntDesign
-                style={styles.rightSpace}
-                name="delete"
-                size={24}
-                color="#5CC2FF" />
-            <Entypo
-                style={styles.rightSpace}
-                name="edit"
-                size={24}
-                color="#5CC2FF" />
+            <TouchableOpacity onPress={() => console.log('yeeeeep')}>
+                <AntDesign
+                    style={styles.rightSpace}
+                    name="delete"
+                    size={24}
+                    color="#5CC2FF" />
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Entypo
+                    style={styles.rightSpace}
+                    name="edit"
+                    size={24}
+                    color="#5CC2FF" />
+            </TouchableOpacity>
             <Text>{item.title}</Text>
             <View style={{ flex: 1 }}></View>
             <CheckBox

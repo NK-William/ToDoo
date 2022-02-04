@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo } from '@expo/vector-icons';
@@ -42,9 +42,9 @@ const TodoScreen = () => {
           keyExtractor={item => item.id}
           style={{ flex: 1 }}
         />
-        <View style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton}>
           <Entypo name="plus" size={24} color="white" />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
