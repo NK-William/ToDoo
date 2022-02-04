@@ -28,7 +28,7 @@ const TodoScreen = () => {
   ]);
 
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
-    <TodoItem item={item} />
+    <TodoItem item={item} onPress={setDoto} />
   );
 
   return (

@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { SetStateAction, Dispatch } from 'react';
 import CheckBox from 'expo-checkbox';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const TodoItem = ({ item }: { item: { title: string, id: string } }) => {
+const TodoItem = ({ item, onPress }: {
+    item: { title: string, id: string },
+    onPress: Dispatch<SetStateAction<{ id: string, title: string }[]>>
+}) => {
+    console.log(onPress);
     return (
         <View
             style={styles.itemContainer}>
