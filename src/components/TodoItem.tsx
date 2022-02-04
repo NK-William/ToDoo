@@ -7,11 +7,15 @@ const TodoItem = ({ item, onPress }: {
     item: { title: string, id: string },
     onPress: Dispatch<SetStateAction<{ id: string, title: string }[]>>
 }) => {
-    console.log(onPress);
+
+    const deleteItem = () => {
+
+        console.log(item.id);
+    }
     return (
         <View
             style={styles.itemContainer}>
-            <TouchableOpacity onPress={() => console.log('yeeeeep')}>
+            <TouchableOpacity onPress={deleteItem}>
                 <AntDesign
                     style={styles.rightSpace}
                     name="delete"
