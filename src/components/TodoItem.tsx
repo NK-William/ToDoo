@@ -5,12 +5,12 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 
 const TodoItem = ({ item, onPress }: {
     item: { title: string, id: string },
-    onPress: Dispatch<SetStateAction<{ id: string, title: string }[]>>
+    onPress: (id: string) => void
 }) => {
 
     const deleteItem = () => {
 
-        console.log(item.id);
+        onPress(item.id);
     }
     return (
         <View

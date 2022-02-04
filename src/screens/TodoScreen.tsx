@@ -27,8 +27,13 @@ const TodoScreen = () => {
     }
   ]);
 
+  const deleteItem = (id: string) => {
+    let newItems = doto.filter(item => item.id != id);
+    setDoto(newItems);
+  }
+
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
-    <TodoItem item={item} onPress={setDoto} />
+    <TodoItem item={item} onPress={deleteItem} />
   );
 
   return (
