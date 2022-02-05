@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
 import React, { useState } from 'react';
 import TodoItem from '../components/TodoItem';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, AntDesign } from '@expo/vector-icons';
 
 const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
@@ -91,6 +91,10 @@ const TodoScreen = () => {
             </Text>
             <View style={{ height: 1, backgroundColor: primaryColor, width: 50, marginTop: 2 }}></View>
           </View>
+          <TouchableOpacity style={{ position: "absolute", right: 8, top: 8 }}
+            onPress={() => setShowEditor({ showAdd: false, showEdit: false })}>
+            <AntDesign name="closecircleo" size={24} color={primaryColor} />
+          </TouchableOpacity>
           <TextInput style={styles.textInput}
             value={todoText}
             onChangeText={setTodoText} />
