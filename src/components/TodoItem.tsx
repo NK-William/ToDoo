@@ -3,26 +3,27 @@ import React, { SetStateAction, Dispatch } from 'react';
 import CheckBox from 'expo-checkbox';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const TodoItem = ({ item, onPress }: {
+const TodoItem = ({ item, onDeletePressed, onEditPressed }: {
     item: { title: string, id: string },
-    onPress: (id: string) => void
+    onDeletePressed: (id: string) => void,
+    onEditPressed: (id: string) => void
 }) => {
 
-    const deleteItem = () => {
+    // const deleteItem = () => {
 
-        onPress(item.id);
-    }
+    //     onDeletePressed(item.id);
+    // }
     return (
         <View
             style={styles.itemContainer}>
-            <TouchableOpacity onPress={deleteItem}>
+            <TouchableOpacity onPress={() => onDeletePressed(item.id)}>
                 <AntDesign
                     style={styles.rightSpace}
                     name="delete"
                     size={24}
                     color="#5CC2FF" />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => onEditPressed(item.id)}>
                 <Entypo
                     style={styles.rightSpace}
                     name="edit"

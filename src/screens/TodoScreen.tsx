@@ -32,8 +32,22 @@ const TodoScreen = () => {
     setDoto(newItems);
   }
 
+  const updateItem = (id: string) => {
+    // let newItems = doto.filter(item => item.id != id);
+    let newItems = doto;
+    let items = doto.filter(item => item.id == id);
+    const index = newItems.indexOf(items[0]);
+    newItems[index] = { id, title: "Test edit" }
+    console.log(id);
+    console.log(newItems);
+    setDoto([...newItems]);
+  }
+
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
-    <TodoItem item={item} onPress={deleteItem} />
+    <TodoItem
+      item={item}
+      onDeletePressed={deleteItem}
+      onEditPressed={updateItem} />
   );
 
   return (
