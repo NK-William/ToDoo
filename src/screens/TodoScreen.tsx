@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
 import React, { useState } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo } from '@expo/vector-icons';
 
 const primaryColor = "#5CC2FF";
+const { width, height } = Dimensions.get('screen');
 
 const TodoScreen = () => {
+
   const [doto, setDoto] = useState([
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -28,9 +30,8 @@ const TodoScreen = () => {
       title: 'Fiveth Item',
     }
   ]);
-  const [showEditor, setShowEditor] = useState({ showAdd: true, showEdit: false });
-  const editMode = showEditor || setShowEditor;
-
+  const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
+  const editMode = showEditor.showAdd || showEditor.showEdit;
   const addItem = () => {
     const id = new Date().getTime().toString();
     console.log(id);
@@ -70,7 +71,14 @@ const TodoScreen = () => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           style={{ flex: 1 }}
-        /><View style={styles.EditorContainer}>
+        />
+        <TouchableOpacity style={styles.addButton} onPress={() => setShowEditor({ ...showEditor, showAdd: true })}>
+          <Entypo name="plus" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+      {editMode ? <View style={styles.transparentView}></View> : null}
+      {
+        editMode ? <View style={styles.EditorContainer}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Text style={styles.EditorTitle}>
               Hey there
@@ -78,17 +86,14 @@ const TodoScreen = () => {
             <View style={{ height: 1, backgroundColor: primaryColor, width: 50, marginTop: 2 }}></View>
           </View>
           <TextInput style={styles.textInput} />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setShowEditor({ showAdd: false, showEdit: false })}>
             <View style={styles.submitButton}>
               <Text style={{ color: "white" }}>SAVE</Text>
             </View>
           </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.addButton} onPress={addItem}>
-          <Entypo name="plus" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-    </View>
+        </View> : null
+      }
+    </View >
   );
 };
 
@@ -131,6 +136,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  transparentView: {
+    position: 'absolute',
+    height: height,
+    width: width,
+    backgroundColor: "black",
+    opacity: 0.6
+
   },
   addButton: {
     height: 70,

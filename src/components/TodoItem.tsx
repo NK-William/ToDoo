@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React, { SetStateAction, Dispatch } from 'react';
+import React, { SetStateAction, Dispatch, useState } from 'react';
 import CheckBox from 'expo-checkbox';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
@@ -8,6 +8,7 @@ const TodoItem = ({ item, onDeletePressed, onEditPressed }: {
     onDeletePressed: (id: string) => void,
     onEditPressed: (id: string) => void,
 }) => {
+    const [clicked, setClicked] = useState(false);
 
     // const deleteItem = () => {
 
@@ -34,8 +35,8 @@ const TodoItem = ({ item, onDeletePressed, onEditPressed }: {
             <View style={{ flex: 1 }}></View>
             <CheckBox
                 disabled={false}
-                value={false}
-                onValueChange={(newValue) => null}
+                value={clicked}
+                onValueChange={(newValue) => setClicked(newValue)}
                 color="#5CC2FF"
             />
         </View>
