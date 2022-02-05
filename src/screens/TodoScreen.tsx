@@ -7,35 +7,19 @@ const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
 
 const TodoScreen = () => {
-
-  const [doto, setDoto] = useState([
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d732',
-      title: 'Fourth Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29543',
-      title: 'Fiveth Item',
-    }
-  ]);
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
   const editMode = showEditor.showAdd || showEditor.showEdit;
+
+  const [todoText, setTodoText] = useState("")
+
+  const [doto, setDoto] = useState([{ id: "111111111111", title: "Initial title" }]);
+
   const addItem = () => {
     const id = new Date().getTime().toString();
     console.log(id);
-    setDoto([...doto, { id: id, title: "Added item" }]);
+    setShowEditor({ showAdd: false, showEdit: false })
+    setDoto([...doto, { id: id, title: todoText }]);
+    setTodoText("");
   }
 
   const deleteItem = (id: string) => {
@@ -61,6 +45,7 @@ const TodoScreen = () => {
       onEditPressed={updateItem} />
   );
 
+
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>ToDoo</Text>
@@ -85,8 +70,10 @@ const TodoScreen = () => {
             </Text>
             <View style={{ height: 1, backgroundColor: primaryColor, width: 50, marginTop: 2 }}></View>
           </View>
-          <TextInput style={styles.textInput} />
-          <TouchableOpacity onPress={() => setShowEditor({ showAdd: false, showEdit: false })}>
+          <TextInput style={styles.textInput}
+            value={todoText}
+            onChangeText={setTodoText} />
+          <TouchableOpacity onPress={addItem}>
             <View style={styles.submitButton}>
               <Text style={{ color: "white" }}>SAVE</Text>
             </View>
