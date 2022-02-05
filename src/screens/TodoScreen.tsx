@@ -5,6 +5,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
+let itemId: string;
 
 const TodoScreen = () => {
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
@@ -13,6 +14,18 @@ const TodoScreen = () => {
   const [todoText, setTodoText] = useState("")
 
   const [doto, setDoto] = useState([{ id: "111111111111", title: "Initial title" }]);
+
+  const showEditorView = () => {
+    if (showEditor.showAdd) {
+      addItem();
+      console.log("add");
+    } else if (showEditor.showEdit) {
+      updateItem();
+      console.log("edit");
+    } else {
+      alert("Something went wrong, try restart the app");
+    }
+  }
 
   const addItem = () => {
     const id = new Date().getTime().toString();
@@ -27,22 +40,30 @@ const TodoScreen = () => {
     setDoto(newItems);
   }
 
-  const updateItem = (id: string) => {
+  const updateItem = () => {
     // let newItems = doto.filter(item => item.id != id);
     let newItems = doto;
-    const items = doto.filter(item => item.id == id);
+
+    const items = doto.filter(item => item.id == itemId);
     const index = newItems.indexOf(items[0]);
-    newItems[index] = { id, title: "Test edit" }
-    console.log(id);
-    console.log(newItems);
+    newItems[index] = { id: itemId, title: todoText }
     setDoto([...newItems]);
+    setShowEditor({ showAdd: false, showEdit: false });
+    setTodoText("");
+  }
+
+  const openEditorForUpdating = (id: string) => {
+    itemId = id;
+    const items = doto.filter(item => item.id == itemId);
+    setTodoText(items[0].title);
+    setShowEditor({ ...showEditor, showEdit: true });
   }
 
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
     <TodoItem
       item={item}
       onDeletePressed={deleteItem}
-      onEditPressed={updateItem} />
+      onEditPressed={openEditorForUpdating} />
   );
 
 
@@ -73,7 +94,7 @@ const TodoScreen = () => {
           <TextInput style={styles.textInput}
             value={todoText}
             onChangeText={setTodoText} />
-          <TouchableOpacity onPress={addItem}>
+          <TouchableOpacity onPress={showEditorView}>
             <View style={styles.submitButton}>
               <Text style={{ color: "white" }}>SAVE</Text>
             </View>
