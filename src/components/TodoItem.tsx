@@ -6,7 +6,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 const TodoItem = ({ item, onDeletePressed, onEditPressed }: {
     item: { title: string, id: string },
     onDeletePressed: (id: string) => void,
-    onEditPressed: (id: string) => void
+    onEditPressed: (id: string) => void,
 }) => {
 
     // const deleteItem = () => {
