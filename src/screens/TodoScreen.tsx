@@ -13,15 +13,13 @@ const TodoScreen = () => {
 
   const [todoText, setTodoText] = useState("")
 
-  const [doto, setDoto] = useState([{ id: "111111111111", title: "Initial title" }]);
+  const [doto, setDoto] = useState<{ id: string, title: string }[]>([]);
 
   const showEditorView = () => {
     if (showEditor.showAdd) {
       addItem();
-      console.log("add");
     } else if (showEditor.showEdit) {
       updateItem();
-      console.log("edit");
     } else {
       alert("Something went wrong, try restart the app");
     }
@@ -29,7 +27,6 @@ const TodoScreen = () => {
 
   const addItem = () => {
     const id = new Date().getTime().toString();
-    console.log(id);
     setShowEditor({ showAdd: false, showEdit: false })
     setDoto([...doto, { id: id, title: todoText }]);
     setTodoText("");
@@ -57,6 +54,11 @@ const TodoScreen = () => {
     const items = doto.filter(item => item.id == itemId);
     setTodoText(items[0].title);
     setShowEditor({ ...showEditor, showEdit: true });
+  }
+
+  const closeEditor = () => {
+    setShowEditor({ showAdd: false, showEdit: false });
+    setTodoText("");
   }
 
   const renderItem = ({ item }: { item: { title: string, id: string } }) => (
@@ -92,7 +94,7 @@ const TodoScreen = () => {
             <View style={{ height: 1, backgroundColor: primaryColor, width: 50, marginTop: 2 }}></View>
           </View>
           <TouchableOpacity style={{ position: "absolute", right: 8, top: 8 }}
-            onPress={() => setShowEditor({ showAdd: false, showEdit: false })}>
+            onPress={closeEditor}>
             <AntDesign name="closecircleo" size={24} color={primaryColor} />
           </TouchableOpacity>
           <TextInput style={styles.textInput}
