@@ -21,10 +21,6 @@ export default (reducer: todoReducerType,
       boundActions[key] = (actions as any)[key](dispatch);
     }
 
-    console.log(boundActions);
-    console.log("***********************");
-    console.log(typeof boundActions);
-
     return (
       <Context.Provider value={{ state, ...boundActions }
       }>
