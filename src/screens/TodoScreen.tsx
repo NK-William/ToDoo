@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo, AntDesign } from '@expo/vector-icons';
+import { Context } from "../context/TodoContext";
 
 const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
 let itemId: string;
 
 const TodoScreen = () => {
+  const { state } = useContext(Context);
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
   const editMode = showEditor.showAdd || showEditor.showEdit;
 
@@ -75,7 +77,7 @@ const TodoScreen = () => {
       <Text style={styles.todotitle}>2 Tasks</Text>
       <View style={styles.itemsContainer}>
         <FlatList
-          data={doto}
+          data={state}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           style={{ flex: 1 }}

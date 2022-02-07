@@ -39,5 +39,9 @@ export const { Provider, Context } = dataContext(
         addItem,
         deleteItem
     },
-    []
+    [
+        { id: "1", title: "Hey context is working" },
+        { id: "2", title: "This is amazing" },
+        { id: "1", title: "Wooooooooow" }
+    ]
 );
