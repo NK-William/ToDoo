@@ -77,7 +77,7 @@ const TodoScreen = () => {
       <Text style={styles.todotitle}>2 Tasks</Text>
       <View style={styles.itemsContainer}>
         <FlatList
-          data={state}
+          data={doto}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           style={{ flex: 1 }}
