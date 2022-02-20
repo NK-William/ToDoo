@@ -2,12 +2,17 @@
 import { createStore } from "redux";
 
 const initialState = {
-  todo: { id: "123", title: "First item" },
+  todo: [{ id: "123", title: "First item" }],
   searchValue: "",
 };
-const countReducer = (state = initialState, action) => {
-  return state;
+const todoReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "todo/addTodo":
+      return { ...state, todo: [...state.todo, action.payload] };
+    case "searchValue/setSearchValue":
+      return { ...state, searchValue: action.payload };
+  }
 };
 
 // Create the store here
-const store = createStore(countReducer);
+const store = createStore(todoReducer);
