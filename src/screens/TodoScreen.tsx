@@ -71,7 +71,6 @@ const TodoScreen = () => {
       onEditPressed={openEditorForUpdating} />
   );
 
-
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>ToDoo</Text>

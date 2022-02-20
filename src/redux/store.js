@@ -1,19 +1,41 @@
-// Import createStore here
 import { createStore } from "redux";
 
-const initialState = {
-  todo: [{ id: "123", title: "First item" }],
-  searchValue: "",
-};
+// const initialTodos = [{ id: "123", title: "First item" }];
+const initialTodos = [];
 
-const todoReducer = (state = initialState, action) => {
+const todosReducer = (state = initialTodos, action) => {
   switch (action.type) {
-    case "todo/addTodo":
-      return { ...state, todo: [...state.todo, action.payload] };
-    case "searchValue/setSearchValue":
-      return { ...state, searchValue: action.payload };
+    case "todos/addTodo":
+      return [...state.todos, action.payload];
+    default:
+      state;
   }
 };
+
+const initialSearchValue = "";
+
+const searchReducer = (state = initialSearchValue, action) => {
+  switch (action.type) {
+    case "searchValue/setSearchValue":
+      return action.payload;
+    default:
+      state;
+  }
+};
+
+const initialState = {
+  todos: [{ id: "123", title: "First item" }],
+  searchValue: "",
+};
+const rootReducer = (state = initialState, action) => {
+  const nextState = {
+    todos: todosReducer(state.todos, action),
+    searchValue: searchReducer(state.todo, action),
+  };
+  return nextState;
+};
+
+export const store = createStore(rootReducer);
 
 // action creators
 const addTodo = (todo) => {
@@ -29,5 +51,3 @@ const setSearchValue = (value) => {
     payload: value,
   };
 };
-
-const store = createStore(todoReducer);
