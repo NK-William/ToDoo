@@ -5,6 +5,7 @@ const initialState = {
   todo: [{ id: "123", title: "First item" }],
   searchValue: "",
 };
+
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "todo/addTodo":
@@ -14,5 +15,19 @@ const todoReducer = (state = initialState, action) => {
   }
 };
 
-// Create the store here
+// action creators
+const addTodo = (todo) => {
+  return {
+    type: "todo/addTodo",
+    payload: todo,
+  };
+};
+
+const setSearchValue = (value) => {
+  return {
+    type: "searchValue/setSearchValue",
+    payload: value,
+  };
+};
+
 const store = createStore(todoReducer);
