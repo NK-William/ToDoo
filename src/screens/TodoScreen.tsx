@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Dimensions, Button } from 'react-native';
 import React, { useState, useContext } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo, AntDesign } from '@expo/vector-icons';
@@ -9,8 +9,9 @@ const { width, height } = Dimensions.get('screen');
 let itemId: string;
 
 const TodoScreen = () => {
-  const { state } = useContext(Context);
+  // const { state } = useContext(Context);
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
+  const [searchValue, setSearchValue] = useState("");
   const editMode = showEditor.showAdd || showEditor.showEdit;
 
   const [todoText, setTodoText] = useState("")
@@ -76,6 +77,14 @@ const TodoScreen = () => {
       <Text style={styles.appTitle}>ToDoo</Text>
       <Text style={styles.todotitle}>2 Tasks</Text>
       <View style={styles.itemsContainer}>
+        <TextInput
+          style={styles.search}
+          placeholder="search"
+          textAlign={"center"}
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={searchValue}
+          onChangeText={(text) => setSearchValue(text)} />
         <FlatList
           data={doto}
           renderItem={renderItem}
@@ -132,6 +141,12 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     paddingVertical: 30,
     paddingHorizontal: 15
+  },
+  search: {
+    borderWidth: 1,
+    borderColor: primaryColor,
+    borderRadius: 10,
+    padding: 4
   },
   EditorContainer: {
     justifyContent: "space-between",
