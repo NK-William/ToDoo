@@ -28,9 +28,7 @@ const reducers = {
   searchValue: searchReducer,
 };
 
-const rootReducer = combineReducers(reducers);
-
-export const store = createStore(rootReducer);
+export const store = createStore(combineReducers(reducers));
 
 // action creators
 const addTodo = (todo) => {
