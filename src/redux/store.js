@@ -30,7 +30,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   const nextState = {
     todos: todosReducer(state.todos, action),
-    searchValue: searchReducer(state.todo, action),
+    searchValue: searchReducer(state.searchValue, action),
   };
   return nextState;
 };
