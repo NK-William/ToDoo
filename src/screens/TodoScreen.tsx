@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import { Context } from "../context/TodoContext";
+import { store } from "../redux/store";
 
 const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
@@ -70,6 +71,9 @@ const TodoScreen = () => {
       onDeletePressed={deleteItem}
       onEditPressed={openEditorForUpdating} />
   );
+
+  console.log(store.getState());
+  // console.log("**************");
 
   return (
     <View style={styles.container}>

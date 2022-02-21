@@ -5,9 +5,9 @@ import { Provider } from "./src/context/TodoContext";
 
 export default function App() {
   return (
-    <Provider>
-      <TodoScreen />
-    </Provider>
+    // <Provider>
+    <TodoScreen />
+    // </Provider>
   )
 }
 

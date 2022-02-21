@@ -1,14 +1,14 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
 // const initialTodos = [{ id: "123", title: "First item" }];
-const initialTodos = [];
+const initialTodos = [{ id: "123", title: "First item" }];
 
 const todosReducer = (state = initialTodos, action) => {
   switch (action.type) {
     case "todos/addTodo":
       return [...state.todos, action.payload];
     default:
-      state;
+      return state;
   }
 };
 
@@ -19,21 +19,16 @@ const searchReducer = (state = initialSearchValue, action) => {
     case "searchValue/setSearchValue":
       return action.payload;
     default:
-      state;
+      return state;
   }
 };
 
-const initialState = {
-  todos: [{ id: "123", title: "First item" }],
-  searchValue: "",
+const reducers = {
+  todos: todosReducer,
+  searchValue: searchReducer,
 };
-const rootReducer = (state = initialState, action) => {
-  const nextState = {
-    todos: todosReducer(state.todos, action),
-    searchValue: searchReducer(state.searchValue, action),
-  };
-  return nextState;
-};
+
+const rootReducer = combineReducers(reducers);
 
 export const store = createStore(rootReducer);
 
