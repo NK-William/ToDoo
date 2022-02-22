@@ -3,7 +3,16 @@ import React, { useState, useContext } from 'react';
 import TodoItem from '../components/TodoItem';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import { Context } from "../context/TodoContext";
-import { store } from "../redux/store";
+
+// useSelector()
+// returns data from the Redux store using selectors
+// It subscribes a child component of <Provider /> to changes in the
+// store. React, not Redux, will re-render the component if the data from the selector changes
+// This optimizes the performance of the application by only re-rendering components that have
+// had their data change and not the entire application.
+import { useSelector } from 'react-redux';
+import { selectTodos } from '../redux/features/todos/todosSlice';
+import { selectSearchValue } from '../redux/features/searchValue/searchValueSlice';
 
 const primaryColor = "#5CC2FF";
 const { width, height } = Dimensions.get('screen');
@@ -11,6 +20,9 @@ let itemId: string;
 
 const TodoScreen = () => {
   // const { state } = useContext(Context);
+
+  const todos = useSelector(selectTodos);
+  const selectedSearchValue = useSelector(selectSearchValue);
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
   const [searchValue, setSearchValue] = useState("");
   const editMode = showEditor.showAdd || showEditor.showEdit;
@@ -72,8 +84,9 @@ const TodoScreen = () => {
       onEditPressed={openEditorForUpdating} />
   );
 
-  console.log(store.getState());
-  // console.log("**************");
+  console.log("**************");
+  console.log(todos);
+  console.log("with search value: " + selectedSearchValue);
 
   return (
     <View style={styles.container}>

@@ -1,13 +1,5 @@
-// actions
-export const setSearchValue = (value) => {
-  return {
-    type: "searchValue/setSearchValue",
-    payload: value,
-  };
-};
-
 //reducer
-const initialSearchValue = "";
+const initialSearchValue = "Teat search";
 
 export const searchReducer = (state = initialSearchValue, action) => {
   switch (action.type) {
@@ -17,3 +9,14 @@ export const searchReducer = (state = initialSearchValue, action) => {
       return state;
   }
 };
+
+// actions
+export const setSearchValue = (value) => {
+  return {
+    type: "searchValue/setSearchValue",
+    payload: value,
+  };
+};
+
+// Selectors
+export const selectSearchValue = (state) => state.searchValue;

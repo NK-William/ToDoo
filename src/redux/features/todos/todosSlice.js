@@ -1,11 +1,3 @@
-// actions
-export const addTodo = (todo) => {
-  return {
-    type: "todo/addTodo",
-    payload: todo,
-  };
-};
-
 // reducer
 const initialTodos = [{ id: "123", title: "First item" }];
 
@@ -17,3 +9,14 @@ export const todosReducer = (state = initialTodos, action) => {
       return state;
   }
 };
+
+// actions
+export const addTodo = (todo) => {
+  return {
+    type: "todo/addTodo",
+    payload: todo,
+  };
+};
+
+// selectors
+export const selectTodos = (state) => state.todos;
