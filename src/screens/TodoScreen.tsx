@@ -10,8 +10,8 @@ import { Context } from "../context/TodoContext";
 // store. React, not Redux, will re-render the component if the data from the selector changes
 // This optimizes the performance of the application by only re-rendering components that have
 // had their data change and not the entire application.
-import { useSelector } from 'react-redux';
-import { selectTodos } from '../redux/features/todos/todosSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectTodos, addTodo } from '../redux/features/todos/todosSlice';
 import { selectSearchValue } from '../redux/features/searchValue/searchValueSlice';
 
 const primaryColor = "#5CC2FF";
@@ -21,6 +21,7 @@ let itemId: string;
 const TodoScreen = () => {
   // const { state } = useContext(Context);
 
+  const dispatch = useDispatch()
   const todos = useSelector(selectTodos);
   const selectedSearchValue = useSelector(selectSearchValue);
   const [showEditor, setShowEditor] = useState({ showAdd: false, showEdit: false });
@@ -107,7 +108,11 @@ const TodoScreen = () => {
           keyExtractor={item => item.id}
           style={{ flex: 1 }}
         />
-        <TouchableOpacity style={styles.addButton} onPress={() => setShowEditor({ ...showEditor, showAdd: true })}>
+        <TouchableOpacity style={styles.addButton} onPress={() => {
+          console.log("Ckicked");
+          dispatch(addTodo({ id: "567", title: "Second items" }))
+        }}>
+          {/* </TouchableOpacity>/<TouchableOpacity style={styles.addButton} onPress={() => setShowEditor({ ...showEditor, showAdd: true })}> */}
           <Entypo name="plus" size={24} color="white" />
         </TouchableOpacity>
       </View>

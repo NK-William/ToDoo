@@ -1,5 +1,5 @@
 //reducer
-const initialSearchValue = "Teat search";
+const initialSearchValue = "Test search";
 
 export const searchReducer = (state = initialSearchValue, action) => {
   switch (action.type) {

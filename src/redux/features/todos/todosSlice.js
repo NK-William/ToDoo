@@ -4,7 +4,7 @@ const initialTodos = [{ id: "123", title: "First item" }];
 export const todosReducer = (state = initialTodos, action) => {
   switch (action.type) {
     case "todos/addTodo":
-      return [...state.todos, action.payload];
+      return [...state, action.payload];
     default:
       return state;
   }
@@ -12,8 +12,9 @@ export const todosReducer = (state = initialTodos, action) => {
 
 // actions
 export const addTodo = (todo) => {
+  console.log("action creator");
   return {
-    type: "todo/addTodo",
+    type: "todos/addTodo",
     payload: todo,
   };
 };
