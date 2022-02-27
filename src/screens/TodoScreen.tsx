@@ -11,7 +11,7 @@ import { Context } from "../context/TodoContext";
 // This optimizes the performance of the application by only re-rendering components that have
 // had their data change and not the entire application.
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTodos, addTodo } from '../redux/features/todos/todosSlice';
+import { selectTodos, addTodo, updateTodo } from '../redux/features/todos/todosSlice';
 import { selectSearchValue } from '../redux/features/searchValue/searchValueSlice';
 
 const primaryColor = "#5CC2FF";
@@ -45,7 +45,8 @@ const TodoScreen = () => {
   const addItem = () => {
     const id = new Date().getTime().toString();
     setShowEditor({ showAdd: false, showEdit: false })
-    setDoto([...doto, { id: id, title: todoText }]);
+    dispatch(addTodo({ id, title: todoText }))
+    //setDoto([...doto, { id: id, title: todoText }]);
     setTodoText("");
   }
 
@@ -55,20 +56,14 @@ const TodoScreen = () => {
   }
 
   const updateItem = () => {
-    // let newItems = doto.filter(item => item.id != id);
-    let newItems = doto;
-
-    const items = doto.filter(item => item.id == itemId);
-    const index = newItems.indexOf(items[0]);
-    newItems[index] = { id: itemId, title: todoText }
-    setDoto([...newItems]);
+    dispatch(updateTodo({ id: itemId, title: todoText }, itemId));
     setShowEditor({ showAdd: false, showEdit: false });
     setTodoText("");
   }
 
   const openEditorForUpdating = (id: string) => {
     itemId = id;
-    const items = doto.filter(item => item.id == itemId);
+    const items = todos.filter(item => item.id == itemId);
     setTodoText(items[0].title);
     setShowEditor({ ...showEditor, showEdit: true });
   }
@@ -103,16 +98,16 @@ const TodoScreen = () => {
           value={searchValue}
           onChangeText={(text) => setSearchValue(text)} />
         <FlatList
-          data={doto}
+          data={todos}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           style={{ flex: 1 }}
         />
-        <TouchableOpacity style={styles.addButton} onPress={() => {
+        {/* <TouchableOpacity style={styles.addButton} onPress={() => {
           console.log("Ckicked");
           dispatch(addTodo({ id: "567", title: "Second items" }))
-        }}>
-          {/* </TouchableOpacity>/<TouchableOpacity style={styles.addButton} onPress={() => setShowEditor({ ...showEditor, showAdd: true })}> */}
+        }}> */}
+        <TouchableOpacity style={styles.addButton} onPress={() => setShowEditor({ ...showEditor, showAdd: true })}>
           <Entypo name="plus" size={24} color="white" />
         </TouchableOpacity>
       </View>

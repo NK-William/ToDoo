@@ -5,6 +5,14 @@ export const todosReducer = (state = initialTodos, action) => {
   switch (action.type) {
     case "todos/addTodo":
       return [...state, action.payload];
+    case "todos/updateTodo":
+      return state.map((todo) => {
+        if (todo.id == action.payload.selectedItemId) {
+          return action.payload.todo;
+        } else {
+          return todo;
+        }
+      });
     default:
       return state;
   }
@@ -12,10 +20,16 @@ export const todosReducer = (state = initialTodos, action) => {
 
 // actions
 export const addTodo = (todo) => {
-  console.log("action creator");
   return {
     type: "todos/addTodo",
     payload: todo,
+  };
+};
+
+export const updateTodo = (todo, selectedItemId) => {
+  return {
+    type: "todos/updateTodo",
+    payload: { todo, selectedItemId },
   };
 };
 

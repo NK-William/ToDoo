@@ -8,3 +8,6 @@ const reducers = {
 };
 
 export const store = createStore(combineReducers(reducers));
+
+// make use of configureStore or createStore(I prefer this
+// since I get to defined my own middlewares)
