@@ -11,7 +11,7 @@ import { Context } from "../context/TodoContext";
 // This optimizes the performance of the application by only re-rendering components that have
 // had their data change and not the entire application.
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTodos, addTodo, updateTodo } from '../redux/features/todos/todosSlice';
+import { selectTodos, addTodo, updateTodo, deleteTodo } from '../redux/features/todos/todosSlice';
 import { selectSearchValue } from '../redux/features/searchValue/searchValueSlice';
 
 const primaryColor = "#5CC2FF";
@@ -51,8 +51,8 @@ const TodoScreen = () => {
   }
 
   const deleteItem = (id: string) => {
-    let newItems = doto.filter(item => item.id != id);
-    setDoto(newItems);
+    dispatch(deleteTodo(id));
+    setTodoText("");
   }
 
   const updateItem = () => {

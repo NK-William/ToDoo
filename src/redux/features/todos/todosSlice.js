@@ -13,6 +13,8 @@ export const todosReducer = (state = initialTodos, action) => {
           return todo;
         }
       });
+    case "todos/deleteTodo":
+      return state.filter((todo) => todo.id != action.payload);
     default:
       return state;
   }
@@ -30,6 +32,14 @@ export const updateTodo = (todo, selectedItemId) => {
   return {
     type: "todos/updateTodo",
     payload: { todo, selectedItemId },
+  };
+};
+
+export const deleteTodo = (selectedItemId) => {
+  console.log("testttttt");
+  return {
+    type: "todos/deleteTodo",
+    payload: selectedItemId,
   };
 };
 
